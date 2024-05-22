@@ -39,6 +39,14 @@ sap.ui.define([
 			return this._oPopoverPromise;
 		},
 
+        openFragment: function() {
+            if (!this._oPopover) {
+                this._oPopover = sap.ui.xmlfragment("project1.view.Popover", this);
+                this.getView().addDependent(this._oPopover);
+            }
+            this._oPopover.openBy(this.getView().byId("BT1"));
+        },
+
         handleTitleSelectorPress: function(oEvent){
             this._getResponsivePopover().then(function (oPopOver) {
 				oPopOver.openBy(oEvent.getParameter("domRef"));
@@ -60,7 +68,7 @@ sap.ui.define([
                 var oObjectHeader = this.byId("TTL1");
 
                 // Atualize o objectTitle com o novo título
-                oObjectHeader.setObjectTitle(sNewTitle);
+                oObjectHeader.setText(sNewTitle);
             }
         },
 
@@ -114,7 +122,7 @@ sap.ui.define([
 
             var oObjectHeader = this.byId("TTL1");
             
-            var sObjectHeaderTitle = oObjectHeader.getObjectTitle();
+            var sObjectHeaderTitle = oObjectHeader.getText();
 
             console.log("TTL1: ", sObjectHeaderTitle);
             

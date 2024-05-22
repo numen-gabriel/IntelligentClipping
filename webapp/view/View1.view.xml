@@ -13,11 +13,14 @@
     <uxap:ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="true" upperCaseAnchorBar="false" >
         <uxap:headerTitle>
 			<uxap:ObjectPageDynamicHeaderTitle id="ObjDyn1" backgroundDesign="Translucent">
-				<uxap:heading>		
-                        <uxap:ObjectPageHeader  id="TTL1" objectTitle="Brazil" showTitleSelector="true"
-                                                titleSelectorPress="handleTitleSelectorPress"
-                                                showMarkers="false"></uxap:ObjectPageHeader>
-						
+				<uxap:heading>	
+                    <HBox>
+                        <Title class="sapUiLargeMarginBegin titleSmall" id="TTL1" level="H4" titleStyle="H4" text="Brazil"/>
+                        <Button id="BT1" class="sapUiTinyMarginEnd sapUiNoContentPadding 
+                                sapMBtnTransparent sapMCustomIcon customButton" 
+                                icon="sap-icon://slim-arrow-down" press="openFragment"/>
+                        <!--<uxap:ObjectPageHeader  id="PH1" showTitleSelector="true" titleSelectorPress="handleTitleSelectorPress"/>-->
+                    </HBox>
 				</uxap:heading>
 				<uxap:actions>
 						<VBox>

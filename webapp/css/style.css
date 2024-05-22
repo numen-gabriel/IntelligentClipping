@@ -55,6 +55,25 @@
   grid-row: span 2;
 }
 
+.titleSmall {
+    font-size: larger !important;
+    color: #0070f2 !important;
+    font-family: '72' !important;
+}
+
+.sapMCustomIcon .sapMBtnInner {
+  border: none !important;
+  background-color: transparent !important;
+}
+
+.sapMCustomIcon .sapMBtnIcon {
+  color: #0A6ED1 !important; /* Cor azul do ícone */
+}
+
+.customButton {
+  margin-top: -0.25rem;
+}
+
 /*¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨*/
 
 .items{
