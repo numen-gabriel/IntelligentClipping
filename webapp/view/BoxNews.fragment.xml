@@ -1,0 +1,30 @@
+<core:FragmentDefinition xmlns:navpopover="sap.ui.comp.navpopover" xmlns="sap.m" xmlns:core="sap.ui.core">
+    <List items="{news>/news}">
+        <!--
+        
+        <items>
+            <StandardListItem title="{news>title}" />
+        </items>
+        -->
+        <items>
+            <CustomListItem>
+                    <VBox class="VBox">
+                        
+                        <Image class="img" src="{news>image}"></Image>
+                        
+                        <VBox class="content">
+                            <Text class="title" text="{news>title}" />
+                            <Text class="author" text="{news>author}" />
+                            <Button class="button" icon="sap-icon://action" type="Transparent"  press="onOpenLink">
+                            <customData>
+                                <core:CustomData key="url" value="{news>url}" writeToDom="false"/>
+                            </customData>
+                        </Button>
+                        </VBox>
+                        
+                    </VBox>
+            </CustomListItem>
+        </items>
+        
+    </List>
+</core:FragmentDefinition>

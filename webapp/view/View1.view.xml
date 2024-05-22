@@ -1,0 +1,208 @@
+<mvc:View   controllerName="project1.controller.View1" 
+            xmlns:mvc="sap.ui.core.mvc" 
+            displayBlock="true" 
+            xmlns:uxap="sap.uxap" 
+            xmlns="sap.m"
+            xmlns:html="http://www.w3.org/1999/xhtml" 
+            xmlns:layout="sap.ui.layout" 
+            xmlns:layout1="sap.ui.commons.layout"
+            xmlns:core="sap.ui.core"
+            xmlns:f="sap.f"
+	        xmlns:grid="sap.ui.layout.cssgrid">
+
+    <uxap:ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="true" upperCaseAnchorBar="false" >
+        <uxap:headerTitle>
+			<uxap:ObjectPageDynamicHeaderTitle id="ObjDyn1" backgroundDesign="Translucent">
+				<uxap:heading>		
+                        <uxap:ObjectPageHeader  id="TTL1" objectTitle="Brazil" showTitleSelector="true"
+                                                titleSelectorPress="handleTitleSelectorPress"
+                                                showMarkers="false"></uxap:ObjectPageHeader>
+						
+				</uxap:heading>
+				<uxap:actions>
+						<VBox>
+                        <Label text="From*"></Label>
+                        <DatePicker id="iFrom" value="{/from}" valueFormat="dd/MM/yyyy" liveChange=".validateField" 
+                        change=".validateField" displayFormat="dd/MM/yyyy" required="true"></DatePicker>
+					</VBox>					
+				</uxap:actions>				
+			</uxap:ObjectPageDynamicHeaderTitle>
+		</uxap:headerTitle>
+        <uxap:headerContent>
+                    <VBox>
+                        <Button text="Load" press="loadClipping" type="Emphasized"></Button>        			
+                    </VBox>	
+        </uxap:headerContent>
+        <uxap:sections>
+            <uxap:ObjectPageSection titleUppercase="false" id="section1" visible="true" showTitle="false">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection id="section1_SS1" titleUppercase="false">
+                        <!-- Corpo do Bloco de Notícias -->
+                        <!-- Adicione o VBoxNews aqui                        
+                        <VBox   id="idVBoxNews" alignItems="Stretch" direction="Column" fitContainer="false" width="auto" 
+                                            height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false"/>
+                                            
+                        -->
+                        <!--<VBox id="idVBoxNews" />-->
+                        
+                        <f:GridList id="grid1"
+                                    items="{news>/news}">
+                            <f:customLayout>
+                                <grid:ResponsiveColumnLayout />
+                            </f:customLayout>
+                            
+                            <f:GridListItem id="gridListItemId">
+                                <VBox class="VBox">
+                                    
+                                    <Image class="img" src="{news>image}"/>
+                                     
+                                    <VBox class="content">
+                                        <Text class="title" text="{news>title}" />
+                                        <Text class="author" text="{news>author}" />
+                                    </VBox>
+                                </VBox>
+                            </f:GridListItem>
+                        </f:GridList>
+                        
+
+                        <!-- Exemplo com Dados Fixos -->
+                        <!--
+                        <f:GridList id="gridTest">
+                            <f:customLayout>
+                                <grid:ResponsiveColumnLayout />
+                            </f:customLayout>
+                            
+                            <f:GridListItem>
+                                <f:layoutData>
+                                    <grid:ResponsiveColumnItemLayoutData columns="10" rows="10" />
+                                </f:layoutData>
+
+                                <VBox class="sapUiSmallMargin">
+                
+                                        <Text text="News Title" />
+                                        <Text text="News Author" />
+                                </VBox>
+                            </f:GridListItem>
+                            
+                            <f:GridListItem>
+                                <f:layoutData>
+                                    <grid:ResponsiveColumnItemLayoutData columns="5" rows="5" />
+                                </f:layoutData>
+
+                                <VBox class="sapUiSmallMargin">
+                
+                                        <Text text="News Title" />
+                                        <Text text="News Author" />
+                                </VBox>
+                            </f:GridListItem>
+
+                            <f:GridListItem>
+                                <f:layoutData>
+                                    <grid:ResponsiveColumnItemLayoutData columns="5" rows="5" />
+                                </f:layoutData>
+
+                                <VBox class="sapUiSmallMargin">
+                
+                                        <Text text="News Title" />
+                                        <Text text="News Author" />
+                                </VBox>
+                            </f:GridListItem>
+
+                            <f:GridListItem>
+                                <f:layoutData>
+                                    <grid:ResponsiveColumnItemLayoutData columns="5" rows="5" />
+                                </f:layoutData>
+
+                                <VBox class="sapUiSmallMargin">
+                
+                                        <Text text="News Title" />
+                                        <Text text="News Author" />
+                                </VBox>
+                            </f:GridListItem>
+
+                            <f:GridListItem>
+                                <f:layoutData>
+                                    <grid:ResponsiveColumnItemLayoutData columns="5" rows="5" />
+                                </f:layoutData>
+
+                                <VBox class="sapUiSmallMargin">
+                
+                                        <Text text="News Title" />
+                                        <Text text="News Author" />
+                                </VBox>
+                            </f:GridListItem>
+                            
+                        </f:GridList>
+                        -->
+
+                        <!--
+                        <f:GridList
+                            id="gridList"
+                            items="{news>/news}">
+                            <f:customLayout>
+                                <grid:GridResponsiveLayout layoutChange="onLayoutChange">
+                                    <grid:layoutS>
+                                        <grid:GridSettings gridTemplateColumns="repeat(auto-fit, 8rem)" gridGap="0.25rem 0.25rem" />
+                                    </grid:layoutS>
+                                    <grid:layoutM>
+                                        <grid:GridSettings gridTemplateColumns="repeat(auto-fit, 12rem)" gridGap="0.5rem 0.5rem" />
+                                    </grid:layoutM>
+                                    <grid:layoutL>
+                                        <grid:GridSettings gridTemplateColumns="repeat(auto-fit, 16rem)" gridGap="0.75rem 0.75rem" />
+                                    </grid:layoutL>
+                                    <grid:layoutXL>
+                                        <grid:GridSettings gridTemplateColumns="50% 25% 25%" gridGap="1rem 1rem" />
+                                    </grid:layoutXL>
+                                </grid:GridResponsiveLayout>
+                            </f:customLayout>
+
+                            <f:GridListItem>
+                                <VBox class="VBox">
+
+                                    <Image class="img" src="{news>image}" /> 
+                                                    
+                                    <VBox class="content">
+                                        <Text class="title" text="{news>title}" />
+                                        <Text class="author" text="{news>author}" />
+                                    </VBox>
+                                </VBox>
+                            </f:GridListItem>
+                        </f:GridList>
+                        -->
+
+                        <!--
+                        <layout:Grid    id="idVBoxNews2" defaultIndent="L0 M0 S0" defaultSpan="L3 M6 S12" 
+                                        position="Left" width="100%" containerQuery="false" hSpacing="1" vSpacing="1" visible="true">
+                            <layout:content>
+                                <FlexBox id="newsFlexBox" justifyContent="SpaceAround" alignItems="Start" wrap="Wrap">
+                                        <List id="newsList" items="{news>/news}">
+                                            <items>
+                                            
+                                                <CustomListItem>
+                                                    <VBox class="VBox">
+                                                        <Image class="img" src="{news>image}" /> 
+                                                    
+                                                        <VBox class="content">
+                                                            <Text class="title" text="{news>title}" />
+                                                            <Text class="author" text="{news>author}" />
+                                                        </VBox>
+                                                    </VBox>
+                                                    
+                                                </CustomListItem>
+                                            </items>
+                                        </List>
+                                </FlexBox>
+                            </layout:content>
+                        </layout:Grid>
+                        -->
+                        
+                        <!-- FlexBox utilizando Geração dinâmica com OTilesContainer-->    
+                        <!--
+                        <FlexBox id="tilesContainer" justifyContent="SpaceAround" wrap="Wrap"/>
+                        -->
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+        </uxap:sections>	
+    </uxap:ObjectPageLayout>
+</mvc:View>

@@ -1,0 +1,128 @@
+.bloco-noticia {
+    /*width: 500px; /* Largura fixa para o VBox */
+    height: 400px; /* Altura fixa para o VBox */
+    background-color: #f0f0f0; /* um tom de branco mais escuro */
+    border: none; /* removendo a borda */
+    border-radius: 5px; /* adicionando cantos arredondados */
+    overflow: hidden; /* esconder o conteúdo que ultrapassa */
+    margin: 10px; /* definindo margem para manter um espaço padronizado entre os VBox */
+    display: flex; /* Permite que os VBoxes sejam exibidos lado a lado */
+    flex-direction: column; /* Alinha os VBoxes verticalmente */
+    position: relative; /* Permitir posicionamento absoluto dos elementos filhos */
+}
+
+.imagem-container {
+    /*height: 50%; /* Ocupa 50% da altura do VBox principal */
+    overflow: hidden; /* Esconder o conteúdo que ultrapassa */
+    display: flex; /* Permite centralizar a imagem verticalmente */
+    align-items: center; /* Centraliza a imagem verticalmente */
+}
+
+.imagem-noticia {
+    /*width: 100%; /* A imagem preenche toda a largura do VBox */
+    /*height: 100%; /* Altura ajustável conforme necessário */
+    object-fit: cover; /* Redimensiona a imagem para preencher o contêiner, mantendo a proporção */
+    object-position: center; /* Centraliza a imagem */
+}
+
+.conteudo-noticia {
+    height: 50%; /* Ocupa 50% da altura do VBox principal */
+}
+
+.titulo-noticia {
+    font-weight: bold; /* tornando o título em negrito */
+    overflow: hidden; /* escondendo o texto que não cabe */
+    white-space: nowrap; /* impedindo que o texto seja quebrado em várias linhas */
+    text-overflow: ellipsis; /* adicionando "..." no final do texto que não cabe */
+}
+
+.texto-autor {
+    color: gray; /* cor mais discreta para o texto do autor */
+    font-size: 12px; /* ajustando o tamanho do texto do autor */
+}
+
+/*¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨*/
+
+/* Estilo para layout de 5 colunas */
+.layout-5-columns {
+  grid-column: span 4;
+  grid-row: span 1;
+}
+
+/* Estilo para layout de 10 colunas */
+.layout-10-columns {
+  grid-column: span 8;
+  grid-row: span 2;
+}
+
+/*¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨*/
+
+.items{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.VBox {
+    /*
+    height: 100%;
+    */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /*add*/
+    align-items: stretch;
+
+    overflow: auto;
+    font-family: sans-serif;
+   
+    border-radius: 10px;
+   
+    filter: drop-shadow(0 2px 30px rgba(0, 0, 0, 0.3))
+      drop-shadow(0 0 0 rgba(0, 0, 0, 0.42));
+   
+    background: lightblue;
+  }
+
+  .img {
+    /*
+    flex-grow: 1;
+    */
+    height: 100%;
+    
+    object-fit: cover;
+    width: 100%;
+    
+  }
+
+  .content {
+    flex-grow: 0;
+    background-color: lightcoral;
+    padding: 8px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+   
+  .title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #515559;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+  }
+   
+  .author {
+    font-size: 11px;
+    color: #696969;
+  }
+
+  .button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }

@@ -1,0 +1,45 @@
+{
+    "welcomeFile": "index.html",
+    "authenticationMethod": "route",
+    "routes": [
+        {
+            "source": "^/workflow/(.*)$",
+            "target": "/workflow/$1",
+            "authenticationType": "xsuaa",
+            "destination": "workflowtrigger",
+            "csrfProtection": false
+          },    
+          {
+            "source": "^/chat/(.*)$",
+            "target": "/chat/$1",
+            "destination": "Hack2Build_GenAI",
+            "authenticationType": "xsuaa",
+            "csrfProtection": false
+          },    
+          {
+            "source": "^/search-news(.*)$",
+            "target": "/search-news$1",
+            "destination": "worldNewsApi",
+            "authenticationType": "xsuaa",
+            "csrfProtection": false
+          },
+          {
+            "source": "^/resources/(.*)$",
+            "target": "/resources/$1",
+            "authenticationType": "none",
+            "destination": "ui5"
+          },
+          {
+            "source": "^/test-resources/(.*)$",
+            "target": "/test-resources/$1",
+            "authenticationType": "none",
+            "destination": "ui5"
+          },
+          {
+            "source": "^(.*)$",
+            "target": "$1",
+            "service": "html5-apps-repo-rt",
+            "authenticationType": "xsuaa"
+          }
+    ]
+}
