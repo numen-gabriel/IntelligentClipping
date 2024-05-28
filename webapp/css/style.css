@@ -1,3 +1,26 @@
+.impactsBox {
+  display: flex; /* Alterado para exibir como um flex container */
+  justify-content: flex-end; /* Alinhar os itens à direita */
+  position: absolute; /* Posicionamento absoluto */
+  right: 10px; /* Distância da direita */
+}
+
+.priceImpactBox,
+.esgImpactBox {
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 5px;
+  border-radius: 8px; /* Adicionando bordas arredondadas */
+  margin-top: 10px; /* Adicionando margem superior */
+}
+
+.esgImpactBox {
+  margin-left: 10px; /* Adicionando margem esquerda */
+}
+
+.priceImpactBox.visible + .esgImpactBox.visible {
+  margin-left: 0; /* Remover a margem esquerda se ambas estiverem visíveis */
+}
+
 .bloco-noticia {
     /*width: 500px; /* Largura fixa para o VBox */
     height: 400px; /* Altura fixa para o VBox */

@@ -48,17 +48,26 @@
                         -->
                         <!--<VBox id="idVBoxNews" />-->
                         
-                        <f:GridList id="grid1"
-                                    items="{news>/news}">
+                        <f:GridList id="grid1" items="{news>/news}">
                             <f:customLayout>
                                 <grid:ResponsiveColumnLayout />
                             </f:customLayout>
                             
                             <f:GridListItem id="gridListItemId">
                                 <VBox class="VBox">
-                                    
                                     <Image class="img" src="{news>image}"/>
-                                     
+                                        
+                                    <FlexBox class="impactsBox" justifyContent="End" alignItems="Start" wrap="Wrap">
+                                        <FlexBox class="priceImpactBox" visible="{= ${news>price} === 'High'}">
+                                            <Text text="Price Impact" />
+                                        </FlexBox>
+
+                                        <FlexBox class="esgImpactBox" visible="{= ${news>esg} === 'High'}">
+                                            <Text text="ESG Impact" />
+                                        </FlexBox>
+                                    </FlexBox>
+                                    
+                                    
                                     <VBox class="content">
                                         <Text class="title" text="{news>title}" />
                                         <Text class="author" text="{news>author}" />

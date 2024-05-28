@@ -101,7 +101,9 @@ sap.ui.define([
                 source: baseUrl,
                 author: sAuthor,
                 source_country: sSourceCountry,
-                image: sImage
+                image: sImage,
+                price: "High",
+                esg: "High"
               });
             
             oModel.setData(oData);
