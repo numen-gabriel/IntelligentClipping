@@ -73,9 +73,7 @@ sap.ui.define([
         },
 
         adicionaNews: function(sTitle,sText,sUrl,sDate,sSource,sAuthor,sSourceCountry,sImage){
-
-            debugger;
-            
+                        
             var oModel = this.getView().getModel("news");
             var oData = oModel.getData();
         
@@ -180,7 +178,7 @@ sap.ui.define([
             const dataFormatada = `${partesData[2]}-${partesData[1]}-${partesData[0]}`;
             console.log("var dataFormatada: ", dataFormatada);
 
-              var meusDados = "35688e4e32d44002beeec326abee2973";
+              var meusDados = "41f32810c57c4cc1b78e9d792c813d09";
               
               const params = new URLSearchParams({
                 'text': sObjectHeaderTitle,
@@ -215,6 +213,39 @@ sap.ui.define([
               .catch(error => console.error("Erro ao chamar a API:", error));
         },
 
+        onImageError: function(oEvent){
+            // var sText = oImage.getCustomData()[1].getValue();            
+            var oImage = oEvent.getSource();
+            var sText = oImage.getCustomData()[1].getValue();
+            var iWidth = oImage.getWidth();
+            var iHeight = oImage.getHeight();
+
+            var sSvgImage = this._generateSvgImage(sText, iWidth, iHeight);
+
+            oImage.setSrc(sSvgImage);
+
+        },
+
+        _generateSvgImage: function (sText, iWidth, iHeight) {
+            var sSvgTemplate =
+                `<svg width="${iWidth}" height="${iHeight}" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100%" height="100%" fill="white" />
+                    <foreignObject x="10" y="10" width="180" height="180">
+                        <div xmlns="http://www.w3.org/1999/xhtml" style="font-size: 3vw; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; text-align: center; word-wrap: break-word;">
+                            ${sText}
+                        </div>
+                    </foreignObject>
+                </svg>`;
+
+            // Parse the SVG template to ensure proper encoding
+            var parser = new DOMParser();
+            var xmlDoc = parser.parseFromString(sSvgTemplate, "image/svg+xml");
+            var serializer = new XMLSerializer();
+            var sSvgSerialized = serializer.serializeToString(xmlDoc);
+
+            return "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(sSvgSerialized)));
+        },       
+        
         getBaseURL: function () {
             var appId = this.getOwnerComponent().getManifestEntry("/sap.app/id");
             var appPath = appId.replaceAll(".", "/");

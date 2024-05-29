@@ -134,7 +134,7 @@
 
                     </HBox>
 
-                            <VBox class="sapUiLargeMarginEnd boxRelevanceLegend">
+                            <VBox class="sapUiSmallMarginEnd boxRelevanceLegend">
                                 <Text text="Relevance" class="" />
                                 <html:div class="customRelevanceIndicator">
                                     <html:div class="colorSegment greenSegment"></html:div>
@@ -190,16 +190,17 @@
                                         <custom:layoutData>
                                             <grid:GridItemLayoutData gridRow="{news>GridRow}" gridColumn="{news>GridColumn}" />
                                         </custom:layoutData>                                                                                                                                      
-                                    <Image class="NewsImg" src="{news>image}">
+                                    <Image class="NewsImg" src="{news>image}" error="onImageError" > 
                                         <customData>
                                             <core:CustomData xmlns:core="sap.ui.core"
                                             writeToDom="true"
                                             key="Img"
                                             value="{news>ImgClass}"
                                             />
+                                            <core:CustomData key="myTitle" value="{news>title}" writeToDom="true"/>
                                         </customData>                                     
                                     </Image>   
-
+                                 
                                         <FlexBox class="impactsBox" justifyContent="End" alignItems="Start" wrap="Wrap">
                                             <FlexBox class="priceImpactBox" visible="{= ${news>price} === 'High'}">
                                                 <Text text="Price" />
