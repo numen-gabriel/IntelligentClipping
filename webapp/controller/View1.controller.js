@@ -20,6 +20,20 @@ sap.ui.define([
 
         },
 
+        onTabSelect: function(oEvent){
+            this.setSelectedKey(oEvent);            
+        },
+
+        setSelectedKey: function(oEvent){
+            this.byId("tabAll").getCustomData()[1].setValue("False");
+            this.byId("tabPrice").getCustomData()[1].setValue("False");
+            this.byId("tabAval").getCustomData()[1].setValue("False");
+            this.byId("tabEsg").getCustomData()[1].setValue("False");
+
+            oEvent.getSource().getCustomData()[1].setValue("True");
+
+        },
+
         onOpenLink: function(oEvent){
             var sUrl = oEvent.getSource().getCustomData()[0].getValue(); 
             window.open(sUrl,"_blank");              

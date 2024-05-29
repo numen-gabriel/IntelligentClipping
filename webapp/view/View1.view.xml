@@ -106,24 +106,28 @@
                     <HBox justifyContent="SpaceBetween" class="sapUiMediumMarginBegin">
 
                         <HBox class="ButtonFilter sapUiSmallMarginTop">
-                            <Button text="All news"            press="onTabSelect" class=""                       >
+                            <Button id="tabAll" text="All news"            press="onTabSelect" class=""                       >
                                 <customData>
                                     <core:CustomData key="myTextColor" value="Blue" writeToDom="true"/>
+                                    <core:CustomData key="mySelectedFilter" value="True" writeToDom="true"/>
                                 </customData>                    
                             </Button>
-                            <Button text="Price impact"        press="onTabSelect" class="sapUiMediumMarginBegin" >
+                            <Button id="tabPrice" text="Price impact"        press="onTabSelect" class="sapUiMediumMarginBegin" >
                                 <customData>
                                     <core:CustomData key="myTextColor" value="Pink" writeToDom="true"/>
+                                    <core:CustomData key="mySelectedFilter" value="False" writeToDom="true"/>
                                 </customData>
                             </Button>
-                            <Button text="Availability impact" press="onTabSelect" class="sapUiMediumMarginBegin">
+                            <Button id="tabAval" text="Availability impact" press="onTabSelect" class="sapUiMediumMarginBegin">
                                 <customData>
                                     <core:CustomData key="myTextColor" value="Purple" writeToDom="true"/>
+                                    <core:CustomData key="mySelectedFilter" value="False" writeToDom="true"/>
                                 </customData>                    
                             </Button>
-                            <Button text="ESG impact"          press="onTabSelect" class="sapUiMediumMarginBegin">
+                            <Button id="tabEsg" text="ESG impact"          press="onTabSelect" class="sapUiMediumMarginBegin">
                                 <customData>
                                     <core:CustomData key="myTextColor" value="GreenWater" writeToDom="true"/>
+                                    <core:CustomData key="mySelectedFilter" value="False" writeToDom="true"/>
                                 </customData>                    
                             </Button>
                         </HBox>

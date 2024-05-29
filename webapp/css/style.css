@@ -472,3 +472,16 @@
   border-left: none;
   border-top: none;
 }
+
+*[data-mySelectedFilter='True'] .sapMBtnInner::before{
+  content: "";
+  position: absolute;
+  /* box-sizing: border-box; */
+  left: 0;
+  top: 0.0625rem;
+  right: 0.0625rem;
+  bottom: 0;
+  border-bottom: .125rem solid #0032a5;
+  pointer-events: none;
+  border-radius: 0px;
+}
