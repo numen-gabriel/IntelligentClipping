@@ -1,4 +1,4 @@
-<mvc:View   controllerName="project1.controller.View1" 
+<mvc:View xmlns:microchart="sap.suite.ui.microchart"   controllerName="project1.controller.View1" 
             xmlns:mvc="sap.ui.core.mvc" 
             displayBlock="true" 
             xmlns:uxap="sap.uxap" 
@@ -8,204 +8,259 @@
             xmlns:layout1="sap.ui.commons.layout"
             xmlns:core="sap.ui.core"
             xmlns:f="sap.f"
+            xmlns:custom="project1.control"
 	        xmlns:grid="sap.ui.layout.cssgrid">
 
-    <uxap:ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="true" upperCaseAnchorBar="false" >
-        <uxap:headerTitle>
-			<uxap:ObjectPageDynamicHeaderTitle id="ObjDyn1" backgroundDesign="Translucent">
-				<uxap:heading>	
-                    <HBox>
-                        <Title class="sapUiLargeMarginBegin titleSmall" id="TTL1" level="H4" titleStyle="H4" text="Brazil"/>
-                        <Button id="BT1" class="sapUiTinyMarginEnd sapUiNoContentPadding 
-                                sapMBtnTransparent sapMCustomIcon customButton" 
-                                icon="sap-icon://slim-arrow-down" press="openFragment"/>
-                        <!--<uxap:ObjectPageHeader  id="PH1" showTitleSelector="true" titleSelectorPress="handleTitleSelectorPress"/>-->
+	<Page
+		id="idPage"
+		title=" Intelligent Clipping"
+        showHeader="false"
+        showSubHeader="true"        
+		class= "sapUiResponsivePadding--header pageStyle" >
+		<!-- this CSS class add a standard spacing to all the page content -->        
+                    
+		<content>
+
+            <Toolbar design="Solid" class="sapUiMediumMargin sapUiResponsiveContentPadding noBottomBorder">
+                <VariantManagement id="vm"
+                    select="onSelect"
+                    save="onSave"
+                    manage="onManage"
+                    selectedKey="Steel"
+                    defaultKey="Steel"
+                    showFooter="false"
+                    popoverTitle="Materials">
+                    <items>
+                        <VariantItem key="Steel" title="Steel"
+                            author="B"
+                            favorite="true"
+                            visible="true"
+                            executeOnSelect="false"
+                            rename="false"
+                            changeable="false"
+                            remove="false"
+                            sharing="public" />
+                        <VariantItem key="Oil" title="Oil"
+                            author="A"
+                            favorite="true"
+                            visible="true"
+                            executeOnSelect="false"
+                            rename="true"
+                            changeable="true"
+                            remove="true"
+                            sharing="private" />
+                        <VariantItem key="Brazil" title="Brazil"
+                            author="A"
+                            favorite="true"
+                            visible="true"
+                            executeOnSelect="true"
+                            rename="true"
+                            changeable="true"
+                            remove="true"
+                            sharing="private" />
+                    </items>
+                </VariantManagement>
+                <ToolbarSpacer />
+                <HBox >
+                    <DatePicker id="iFrom" value="{/from}" valueFormat="dd/MM/yyyy" liveChange=".validateField" 
+                        change=".validateField" displayFormat="dd/MM/yyyy" required="true" />                    
+                </HBox>
+                
+            </Toolbar>
+
+		<!-- <mc:StackedBarMicroChart size="XS" precision="0" class="sapUiSmallMargin" >            
+			<mc:bars>
+				<mc:StackedBarMicroChartBar displayValue="" value="33" valueColor="#00C453"/>
+				<mc:StackedBarMicroChartBar displayValue="" value="33" valueColor="#FFC700"/>
+				<mc:StackedBarMicroChartBar displayValue="" value="33" valueColor="#FF0000"/>
+			</mc:bars>
+		</mc:StackedBarMicroChart>        -->
+
+    <!-- <VBox class="sapUiSmallMargin">
+        <Text text="Relevance" class="sapUiSmallMarginBottom" />
+        <html:div class='customRelevanceIndicator'>
+                          <html:span class='label'>Low</html:span>
+                          <html:div class='colorSegment greenSegment'></html:div>
+                          <html:div class='colorSegment yellowSegment'></html:div>
+                          <html:div class='colorSegment redSegment'></html:div>
+                          <html:span class='label'>High</html:span>
+        </html:div>
+    </VBox>        -->                                        
+            <!-- <VBox alignItems="End" class="sapUiMediumMarginEnd">
+                <VBox class="sapUiSmallMarginEnd boxRelevanceLegend">
+                    <Text text="Relevance" class="" />
+                    <html:div class="customRelevanceIndicator">
+                        <html:div class="colorSegment greenSegment"></html:div>
+                        <html:div class="colorSegment yellowSegment"></html:div>
+                        <html:div class="colorSegment redSegment"></html:div>
+                    </html:div>
+                    <HBox justifyContent="SpaceBetween" width="100%" class="">
+                        <Text text="Low" textAlign="Center" />
+                        <Text text="High" textAlign="Center" />
                     </HBox>
-				</uxap:heading>
-				<uxap:actions>
-						<VBox>
-                        <Label text="From*"></Label>
-                        <DatePicker id="iFrom" value="{/from}" valueFormat="dd/MM/yyyy" liveChange=".validateField" 
-                        change=".validateField" displayFormat="dd/MM/yyyy" required="true"></DatePicker>
-					</VBox>					
-				</uxap:actions>				
-			</uxap:ObjectPageDynamicHeaderTitle>
-		</uxap:headerTitle>
-        <uxap:headerContent>
-                    <VBox>
-                        <Button text="Load" press="loadClipping" type="Emphasized"></Button>        			
-                    </VBox>	
-        </uxap:headerContent>
-        <uxap:sections>
-            <uxap:ObjectPageSection titleUppercase="false" id="section1" visible="true" showTitle="false">
-                <uxap:subSections>
-                    <uxap:ObjectPageSubSection id="section1_SS1" titleUppercase="false">
-                        <!-- Corpo do Bloco de Notícias -->
-                        <!-- Adicione o VBoxNews aqui                        
-                        <VBox   id="idVBoxNews" alignItems="Stretch" direction="Column" fitContainer="false" width="auto" 
-                                            height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false"/>
-                                            
-                        -->
-                        <!--<VBox id="idVBoxNews" />-->
-                        
-                        <f:GridList id="grid1"
-                                    items="{news>/news}">
-                            <f:customLayout>
-                                <grid:ResponsiveColumnLayout />
-                            </f:customLayout>
-                            
-                            <f:GridListItem id="gridListItemId">
-                                <VBox class="VBox">
-                                    
-                                    <Image class="img" src="{news>image}"/>
-                                     
-                                    <VBox class="content">
-                                        <Text class="title" text="{news>title}" />
-                                        <Text class="author" text="{news>author}" />
-                                    </VBox>
-                                </VBox>
-                            </f:GridListItem>
-                        </f:GridList>
-                        
+                </VBox>    
+            </VBox> -->
+            <Button text="Load" press="loadClipping" type="Emphasized"></Button>    
+<!-- lugar do tabfillter                     -->
+                <HBox class="HeaderFilterBox" justifyContent="SpaceBetween">
+                    <HBox justifyContent="SpaceBetween" class="sapUiMediumMarginBegin">
 
-                        <!-- Exemplo com Dados Fixos -->
-                        <!--
-                        <f:GridList id="gridTest">
-                            <f:customLayout>
-                                <grid:ResponsiveColumnLayout />
-                            </f:customLayout>
-                            
-                            <f:GridListItem>
-                                <f:layoutData>
-                                    <grid:ResponsiveColumnItemLayoutData columns="10" rows="10" />
-                                </f:layoutData>
+                        <HBox class="ButtonFilter sapUiSmallMarginTop">
+                            <Button text="All news"            press="onTabSelect" class=""                       >
+                                <customData>
+                                    <core:CustomData key="myTextColor" value="Blue" writeToDom="true"/>
+                                </customData>                    
+                            </Button>
+                            <Button text="Price impact"        press="onTabSelect" class="sapUiMediumMarginBegin" >
+                                <customData>
+                                    <core:CustomData key="myTextColor" value="Pink" writeToDom="true"/>
+                                </customData>
+                            </Button>
+                            <Button text="Availability impact" press="onTabSelect" class="sapUiMediumMarginBegin">
+                                <customData>
+                                    <core:CustomData key="myTextColor" value="Purple" writeToDom="true"/>
+                                </customData>                    
+                            </Button>
+                            <Button text="ESG impact"          press="onTabSelect" class="sapUiMediumMarginBegin">
+                                <customData>
+                                    <core:CustomData key="myTextColor" value="GreenWater" writeToDom="true"/>
+                                </customData>                    
+                            </Button>
+                        </HBox>
 
-                                <VBox class="sapUiSmallMargin">
-                
-                                        <Text text="News Title" />
-                                        <Text text="News Author" />
-                                </VBox>
-                            </f:GridListItem>
-                            
-                            <f:GridListItem>
-                                <f:layoutData>
-                                    <grid:ResponsiveColumnItemLayoutData columns="5" rows="5" />
-                                </f:layoutData>
+                        <!-- <VBox alignItems="End" class="sapUiMediumMarginEnd"> -->
+ 
+                        <!-- </VBox>                     -->
 
-                                <VBox class="sapUiSmallMargin">
-                
-                                        <Text text="News Title" />
-                                        <Text text="News Author" />
-                                </VBox>
-                            </f:GridListItem>
+                    </HBox>
 
-                            <f:GridListItem>
-                                <f:layoutData>
-                                    <grid:ResponsiveColumnItemLayoutData columns="5" rows="5" />
-                                </f:layoutData>
+                            <VBox class="sapUiLargeMarginEnd boxRelevanceLegend">
+                                <Text text="Relevance" class="" />
+                                <html:div class="customRelevanceIndicator">
+                                    <html:div class="colorSegment greenSegment"></html:div>
+                                    <html:div class="colorSegment yellowSegment"></html:div>
+                                    <html:div class="colorSegment redSegment"></html:div>
+                                </html:div>
+                                <HBox justifyContent="SpaceBetween" width="100%" class="">
+                                    <Text text="Low" textAlign="Center" />
+                                    <Text text="High" textAlign="Center" />
+                                </HBox>
+                            </VBox>   
 
-                                <VBox class="sapUiSmallMargin">
-                
-                                        <Text text="News Title" />
-                                        <Text text="News Author" />
-                                </VBox>
-                            </f:GridListItem>
+                </HBox>
 
-                            <f:GridListItem>
-                                <f:layoutData>
-                                    <grid:ResponsiveColumnItemLayoutData columns="5" rows="5" />
-                                </f:layoutData>
+            <VBox class="sapUiMediumMarginBegin sapUiMediumMarginTop sapUiSmallMarginBottom sapUiSmallMarginEnd sapUiResponsiveContentPadding" >
 
-                                <VBox class="sapUiSmallMargin">
-                
-                                        <Text text="News Title" />
-                                        <Text text="News Author" />
-                                </VBox>
-                            </f:GridListItem>
+                <VBox >
 
-                            <f:GridListItem>
-                                <f:layoutData>
-                                    <grid:ResponsiveColumnItemLayoutData columns="5" rows="5" />
-                                </f:layoutData>
+                    <VBox >
 
-                                <VBox class="sapUiSmallMargin">
-                
-                                        <Text text="News Title" />
-                                        <Text text="News Author" />
-                                </VBox>
-                            </f:GridListItem>
-                            
-                        </f:GridList>
-                        -->
-
-                        <!--
-                        <f:GridList
-                            id="gridList"
+                        <grid:CSSGrid
+                            width="100%"
+                            id="grid1" 
+                            gridAutoFlow="Row"           
+                            gridAutoRows="1fr"                                    
+                            gridTemplateColumns="repeat(5, 1fr)"
+                            gridTemplateRows="repeat(2, 1fr)"                                                                     
+                            gridGap="1rem 0.5rem"
                             items="{news>/news}">
-                            <f:customLayout>
-                                <grid:GridResponsiveLayout layoutChange="onLayoutChange">
-                                    <grid:layoutS>
-                                        <grid:GridSettings gridTemplateColumns="repeat(auto-fit, 8rem)" gridGap="0.25rem 0.25rem" />
-                                    </grid:layoutS>
-                                    <grid:layoutM>
-                                        <grid:GridSettings gridTemplateColumns="repeat(auto-fit, 12rem)" gridGap="0.5rem 0.5rem" />
-                                    </grid:layoutM>
-                                    <grid:layoutL>
-                                        <grid:GridSettings gridTemplateColumns="repeat(auto-fit, 16rem)" gridGap="0.75rem 0.75rem" />
-                                    </grid:layoutL>
-                                    <grid:layoutXL>
-                                        <grid:GridSettings gridTemplateColumns="50% 25% 25%" gridGap="1rem 1rem" />
-                                    </grid:layoutXL>
-                                </grid:GridResponsiveLayout>
-                            </f:customLayout>
+                                                
+                            <grid:items>
+                                <!-- <VBox class="VBox" visible="true">
+                                    <layoutData>
+                                        <grid:GridItemLayoutData gridRow = "1 / 3" gridColumn="1 / 3" />
+                                    </layoutData>                                    
+                                    <VBox class="">
+                                        <Image class="imgMain" src="https://embrace-autism.com/wp-content/uploads/Tests-DrNatalieEngelbrecht-Test2-hover.svg"/>
+                                    </VBox>                                 
+                                                                                    
+                                    <VBox class="content">
+                                        <Text class="title" text="{news>Count}" />
+                                        <Text class="author" text="Tomas Shelby" />
+                                    </VBox>
+                                </VBox> -->                             
+                                <custom:CustomVBox class="NewsVbox" press=".onClickNews" url="{news>url}">  
+                                    <custom:customData>
+                                        <core:CustomData xmlns:core="sap.ui.core"
+                                        writeToDom="true"
+                                        key="Vbox"
+                                        value="{news>VboxClass}"
+                                        />
+                                    </custom:customData>                               
+                                        <custom:layoutData>
+                                            <grid:GridItemLayoutData gridRow="{news>GridRow}" gridColumn="{news>GridColumn}" />
+                                        </custom:layoutData>                                                                                                                                      
+                                    <Image class="NewsImg" src="{news>image}">
+                                        <customData>
+                                            <core:CustomData xmlns:core="sap.ui.core"
+                                            writeToDom="true"
+                                            key="Img"
+                                            value="{news>ImgClass}"
+                                            />
+                                        </customData>                                     
+                                    </Image>   
 
-                            <f:GridListItem>
-                                <VBox class="VBox">
+                                        <FlexBox class="impactsBox" justifyContent="End" alignItems="Start" wrap="Wrap">
+                                            <FlexBox class="priceImpactBox" visible="{= ${news>price} === 'High'}">
+                                                <Text text="Price" />
+                                            </FlexBox>
 
-                                    <Image class="img" src="{news>image}" /> 
-                                                    
+                                            <FlexBox class="esgImpactBox" visible="{= ${news>esg} === 'High'}">
+                                                <Text text="ESG" />
+                                            </FlexBox>
+
+                                            <FlexBox class="availabilityImpactBox" visible="{= ${news>availability} === 'High'}">
+                                                <Text text="Availability" />
+                                            </FlexBox>
+
+                                        </FlexBox>                                
+
                                     <VBox class="content">
                                         <Text class="title" text="{news>title}" />
-                                        <Text class="author" text="{news>author}" />
-                                    </VBox>
-                                </VBox>
-                            </f:GridListItem>
-                        </f:GridList>
-                        -->
+                                        <HBox justifyContent="SpaceBetween" >
+                                            <Text class="author" text="{news>author}" />
+                                            <HBox class="chartBox">
+                                                <microchart:BulletMicroChart size="S" scale="" targetValue="{news>TargetValue}" showActualValue="false" showTargetValue="false" minValue="0" maxValue="100">
+                                                    <microchart:customData>
+                                                        <core:CustomData key="myBarColor" value="Green" writeToDom="true"/>
+                                                        <core:CustomData key="myTargetVisible" value="{news>Low}" writeToDom="true"/>
+                                                    </microchart:customData>
+                                                    <microchart:actual>
+                                                        <microchart:BulletMicroChartData value="0" color="None"/>                                                                        
+                                                    </microchart:actual>                                                                      
+                                                </microchart:BulletMicroChart>  
+                                                <microchart:BulletMicroChart size="S" scale="" targetValue="{news>TargetValue}" showActualValue="false" showTargetValue="false" minValue="0" maxValue="100">
+                                                    <microchart:customData>
+                                                        <core:CustomData key="myBarColor" value="Yellow" writeToDom="true"/>
+                                                        <core:CustomData key="myTargetVisible" value="{news>Medium}" writeToDom="true"/>
+                                                    </microchart:customData>
+                                                    <microchart:actual>
+                                                        <microchart:BulletMicroChartData value="0" color="None"/>                                                                        
+                                                    </microchart:actual>                                                                      
+                                                </microchart:BulletMicroChart> 
+                                                <microchart:BulletMicroChart size="S" scale="" targetValue="{news>TargetValue}" showActualValue="false" showTargetValue="false" minValue="0" maxValue="100">
+                                                    <microchart:customData>
+                                                        <core:CustomData key="myBarColor" value="Red" writeToDom="true"/>
+                                                        <core:CustomData key="myTargetVisible" value="{news>High}" writeToDom="true"/>
+                                                    </microchart:customData>
+                                                    <microchart:actual>
+                                                        <microchart:BulletMicroChartData value="0" color="None"/>                                                                        
+                                                    </microchart:actual>                                                                      
+                                                </microchart:BulletMicroChart>                                         
+                                            </HBox>                                                                            
+                                        </HBox>                                    
+                                    </VBox>                                                                                                                    
+                                </custom:CustomVBox>                           
+                            </grid:items>
 
-                        <!--
-                        <layout:Grid    id="idVBoxNews2" defaultIndent="L0 M0 S0" defaultSpan="L3 M6 S12" 
-                                        position="Left" width="100%" containerQuery="false" hSpacing="1" vSpacing="1" visible="true">
-                            <layout:content>
-                                <FlexBox id="newsFlexBox" justifyContent="SpaceAround" alignItems="Start" wrap="Wrap">
-                                        <List id="newsList" items="{news>/news}">
-                                            <items>
-                                            
-                                                <CustomListItem>
-                                                    <VBox class="VBox">
-                                                        <Image class="img" src="{news>image}" /> 
-                                                    
-                                                        <VBox class="content">
-                                                            <Text class="title" text="{news>title}" />
-                                                            <Text class="author" text="{news>author}" />
-                                                        </VBox>
-                                                    </VBox>
-                                                    
-                                                </CustomListItem>
-                                            </items>
-                                        </List>
-                                </FlexBox>
-                            </layout:content>
-                        </layout:Grid>
-                        -->
-                        
-                        <!-- FlexBox utilizando Geração dinâmica com OTilesContainer-->    
-                        <!--
-                        <FlexBox id="tilesContainer" justifyContent="SpaceAround" wrap="Wrap"/>
-                        -->
-                    </uxap:ObjectPageSubSection>
-                </uxap:subSections>
-            </uxap:ObjectPageSection>
-        </uxap:sections>	
-    </uxap:ObjectPageLayout>
+                        </grid:CSSGrid>                            
+
+                    </VBox>
+
+                </VBox>
+
+            </VBox>
+		</content>
+	</Page>
+
 </mvc:View>

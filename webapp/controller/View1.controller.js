@@ -73,6 +73,8 @@ sap.ui.define([
         },
 
         adicionaNews: function(sTitle,sText,sUrl,sDate,sSource,sAuthor,sSourceCountry,sImage){
+
+            debugger;
             
             var oModel = this.getView().getModel("news");
             var oData = oModel.getData();
@@ -81,19 +83,48 @@ sap.ui.define([
             const baseUrl = `${url.hostname}`;
 
             var oGridListItem = this.getView().byId("gridListItemId");
-
-            oGridListItem.removeStyleClass("layout-5-columns");
-            oGridListItem.removeStyleClass("layout-10-columns");
+            var sGridRow = "";
+            var sGridColumn = "";
+            var sVboxClass = "";
+            var sImgClass = "";
+            // oGridListItem.removeStyleClass("layout-5-columns");
+            // oGridListItem.removeStyleClass("layout-10-columns");
             
             if(oModel.getProperty("/news").length !== 0) {
-                oGridListItem.addStyleClass("layout-5-columns");
-
+                // oGridListItem.addStyleClass("layout-5-columns");
+                sImgClass  = "img";
+                sVboxClass = "demoBox";
             } else {
-                oGridListItem.addStyleClass("layout-10-columns");
-
+                sGridRow = "1 / 3";
+                sGridColumn = "1 / 3";
+                sImgClass  = "imgMain";
+                sVboxClass = "VBox";                
             }
 
+            var sTarget = 50;
+            var sLow = "False";
+            var sMedium = "False";
+            var sHigh= "False";
+            if( sTarget <= 33.33 ){
+                sLow = "True";
+                sTarget = sTarget;
+            }
+            if( sTarget > 33.33 && sTarget <= 66.66 ){
+                sMedium = "True";
+                sTarget = sTarget - 34
+            }
+            if( sTarget > 66.66 ){
+                sHigh = "True";
+                sTarget = sTarget - 67;
+            }                        
+
+
             oData.news.push({
+                Count: oModel.getProperty("/news").length,
+                GridRow: sGridRow,
+                GridColumn: sGridColumn,
+                VboxClass: sVboxClass,
+                ImgClass: sImgClass,
                 title: sTitle,
                 text: sText,
                 url: sUrl,
@@ -101,7 +132,14 @@ sap.ui.define([
                 source: baseUrl,
                 author: sAuthor,
                 source_country: sSourceCountry,
-                image: sImage
+                image: sImage,
+                TargetValue: sTarget,
+                Low: sLow,   
+                Medium: sMedium,
+                High: sHigh,
+                price: 'High',
+                esg: 'High',
+                availability: 'High',
               });
             
             oModel.setData(oData);
@@ -118,15 +156,23 @@ sap.ui.define([
             }
         },
 
-        loadClipping: function() {
+        calcTarget: function(oValue){
+            var sTotal = 300;
+            var sUnitBar = 100;
+        },
 
-            var oObjectHeader = this.byId("TTL1");
+        loadClipping: function() {
             
-            var sObjectHeaderTitle = oObjectHeader.getText();
+            // var oObjectHeader = this.byId("TTL1");
+            
+            var oMaterial = this.byId("vm").getSelectedKey();
+            
+            // var sObjectHeaderTitle = oObjectHeader.getText();
+            var sObjectHeaderTitle = oMaterial;
 
             console.log("TTL1: ", sObjectHeaderTitle);
             
-            this.getView().byId("section1").setVisible(true);
+            // this.getView().byId("section1").setVisible(true);
             var data = this.getView().getModel().getData();
             console.log("var data: ", data);
             const partesData = data.from.split('/');
@@ -239,8 +285,9 @@ sap.ui.define([
             }
         },
 
-        teste: function() {
-            console.log("clicou")
+        onClickNews: function(oEvent) {
+            var sUrl = oEvent.getParameter("url");
+            sap.m.URLHelper.redirect(sUrl, true);
         }
 
     });

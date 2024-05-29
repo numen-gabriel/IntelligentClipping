@@ -51,7 +51,7 @@
 
 /* Estilo para layout de 10 colunas */
 .layout-10-columns {
-  grid-column: span 8;
+  grid-column: span 7;
   grid-row: span 2;
 }
 
@@ -87,7 +87,6 @@
     height: 100%;
     */
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
     /*add*/
     align-items: stretch;
@@ -95,12 +94,36 @@
     overflow: auto;
     font-family: sans-serif;
    
-    border-radius: 10px;
+    border-radius: 4px;
+   
+    filter: drop-shadow(0 2px 30px rgba(0, 0, 0, 0.3))
+      drop-shadow(0 0 0 rgba(0, 0, 0, 0.42));
+
+    background-color: white;
+   
+    /* background: lightblue; */
+  }
+
+  .VBoxCh {
+    /*
+    height: 100%;
+    */
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    /*add*/
+    align-items: stretch;
+
+    overflow: auto;
+    font-family: sans-serif;
+   
+    border-radius: 4px;
    
     filter: drop-shadow(0 2px 30px rgba(0, 0, 0, 0.3))
       drop-shadow(0 0 0 rgba(0, 0, 0, 0.42));
    
-    background: lightblue;
+    /* background: lightblue; */
+    background-image: url("https://www.ics-shipping.org/wp-content/uploads/2020/10/tanker.jpg");
   }
 
   .img {
@@ -111,12 +134,26 @@
     
     object-fit: cover;
     width: 100%;
+    max-height: 220px;
     
   }
 
+  .imgMain {
+    /*
+    flex-grow: 1;
+    */
+    height: 100%;
+    
+    object-fit: cover;
+    width: 100%;
+    min-height: 518px;
+    max-height: 518px;
+    
+  }  
+
   .content {
     flex-grow: 0;
-    background-color: lightcoral;
+    background-color: white;
     padding: 8px 16px;
     display: flex;
     flex-direction: column;
@@ -145,3 +182,270 @@
     bottom: 0;
     right: 0;
   }
+
+  .noBottomBorder {
+    border-bottom: none !important;
+}
+.pageStyle {
+    background-color: white !important;
+}
+.sapMITBContent{
+    background-color: white !important;
+}
+*[data-myTextColor='Blue'] .sapMBtnText{
+    color: blue !important;
+}
+*[data-myTextColor='Pink'] .sapMBtnText{
+    color: #DC6BB2 !important
+}
+*[data-myTextColor='Purple'] .sapMBtnText{
+    color: #ACA0F4 !important
+}
+*[data-myTextColor='GreenWater'] .sapMBtnText{
+    color: #47C0B9 !important
+}
+:focus>[class*='sapM'] {
+    outline-style: none !important ;
+  }
+.sapMLIBFocusable:focus {
+    outline: 1px dotted #000000;
+    outline-offset: -1px;
+}
+
+.boxRelevanceLegend{
+    width: 5%;
+}
+
+*[data-myBarColor='Green'] .sapSuiteBMCBar{
+  background-color: #00C453;
+}
+
+*[data-myBarColor='Yellow'] .sapSuiteBMCBar{
+  background-color: yellow;
+}
+
+*[data-myBarColor='Red'] .sapSuiteBMCBar{
+  background-color: red;
+}
+
+*[data-myTargetVisible='True'] .sapSuiteBMCTargetBarValue{
+  visibility: visible;
+}
+
+*[data-myTargetVisible='False'] .sapSuiteBMCTargetBarValue{
+  visibility: hidden;
+}
+
+.customRelevanceIndicator {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 10px;
+    border-radius: 0px;
+    overflow: hidden;
+}
+
+.colorSegment {
+    height: 100%;
+    flex: 1;
+}
+
+.greenSegment {
+    background-color: #00C453;
+}
+
+.yellowSegment {
+    background-color: yellow;
+}
+
+.redSegment {
+    background-color: red;
+}
+
+
+.sapMFlexBox.demoBox {
+	border-radius: 4px;
+	/* background-color: #427cac; */
+	text-align: center;
+
+  filter: drop-shadow(0 2px 30px rgba(0, 0, 0, 0.3))
+  drop-shadow(0 0 0 rgba(0, 0, 0, 0.42));
+
+  display: flex;
+  justify-content: space-between;
+  /*add*/
+  align-items: stretch;
+
+  overflow: auto;
+  font-family: sans-serif;
+  background-color: white;
+  
+  /* background: lightblue; */
+
+
+}
+.demoBox .sapMText {
+	color: black;
+}
+
+.sapMText.infoText {
+	font-style: italic;
+}
+
+
+
+.NewsVbox[data-Vbox="demoBox"] { 
+
+	border-radius: 4px;
+	/* background-color: #427cac; */
+
+  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.3))
+  drop-shadow(0 0 0 rgba(0, 0, 0, 0.42));
+
+  display: flex;
+  justify-content: space-between;
+  /*add*/
+  align-items: stretch;
+
+  overflow: auto;
+  font-family: sans-serif;
+  background-color: white;  
+
+ }
+
+ .NewsImg[data-Img="img"] { 
+
+    /*
+    flex-grow: 1;
+    */
+    height: 100%;
+    
+    object-fit: cover;
+    width: 100%;
+    height: 1200px;
+    max-height: 220px;
+    
+ }
+
+ .NewsVbox[data-Vbox="VBox"] { 
+
+    /*
+    height: 100%;
+    */
+    display: flex;
+    justify-content: space-between;
+    /*add*/
+    align-items: stretch;
+
+    overflow: auto;
+    font-family: sans-serif;
+   
+    border-radius: 4px;
+   
+    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.3))
+      drop-shadow(0 0 0 rgba(0, 0, 0, 0.42));
+
+    background-color: white;
+   
+    /* background: lightblue; */
+
+ }
+
+ .NewsImg[data-Img="imgMain"] { 
+
+    /*
+    flex-grow: 1;
+    */
+    height: 100%;
+    
+    object-fit: cover;
+    width: 100%;
+    min-height: 518px;
+    max-height: 518px;
+    
+
+ }
+
+
+ .sapSuiteBMCContent.sapSuiteBMCSizeS{
+  width: 1.5rem !important;
+  height: 1.0rem !important;
+ }
+
+ .sapSuiteBMCExtraSmallLook .sapSuiteBMCChartCanvas{
+  width: 1.5rem;
+ }
+
+ .sapSuiteBMCExtraSmallLook .sapSuiteBMCBar{
+  height: 50% !important;
+ }
+
+ .sapSuiteBMCVerticalAlignmentContainer{
+  min-width: 0rem;
+ }
+
+ .sapSuiteBMCTargetBarValue{
+  height: 80%;
+ }
+ .chartBox{
+  margin-top: 2%;
+ }
+
+ .impactsBox {
+  display: flex; /* Alterado para exibir como um flex container */
+  justify-content: flex-end; /* Alinhar os itens à direita */
+  position: absolute; /* Posicionamento absoluto */
+  right: 10px; /* Distância da direita */
+}
+
+.availabilityImpactBox,
+.priceImpactBox,
+.esgImpactBox {
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 5px;
+  border-radius: 8px; /* Adicionando bordas arredondadas */
+  margin-top: 10px; /* Adicionando margem superior */
+  font: menu;
+}
+
+.priceImpactBox{
+  background-color: #DC6BB2 !important;
+}
+
+.availabilityImpactBox{
+  margin-left: 10px;
+  background-color: #ACA0F4 !important;
+}
+
+.esgImpactBox {
+  margin-left: 10px; /* Adicionando margem esquerda */
+  background-color: #47C0B9 !important;
+}
+
+.availabilityImpactBox .sapMText,.priceImpactBox .sapMText,.esgImpactBox .sapMText{
+  color: white;
+}
+
+.availabilityImpactBox + .priceImpactBox.visible + .esgImpactBox.visible {
+  margin-left: 0; /* Remover a margem esquerda se ambas estiverem visíveis */
+}
+
+.ButtonFilter .sapMBtnInner{
+  border: none !important;
+}
+
+.ButtonFilter .sapMBtn:focus>.sapMFocusable:not(.sapMBadgeIndicator):before{  
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-radius: 0px !important;
+}
+
+
+.HeaderFilterBox{
+  border-image: linear-gradient(to right, #f0f0f0, #d9d9d9) 1;
+  border-style: solid;
+  border-right: none;
+  border-left: none;
+  border-top: none;
+}
