@@ -100,7 +100,7 @@
                     </HBox>
                 </VBox>    
             </VBox> -->
-            <Button text="Load" press="loadClipping" type="Emphasized"></Button>    
+            <!-- <Button text="Load" press="loadClipping" type="Emphasized"></Button>     -->
 <!-- lugar do tabfillter                     -->
                 <HBox class="HeaderFilterBox" justifyContent="SpaceBetween">
                     <HBox justifyContent="SpaceBetween" class="sapUiMediumMarginBegin">
@@ -138,7 +138,7 @@
 
                     </HBox>
 
-                            <VBox class="sapUiSmallMarginEnd boxRelevanceLegend">
+                            <VBox class="sapUiMediumMarginEnd boxRelevanceLegend">
                                 <Text text="Relevance" class="" />
                                 <html:div class="customRelevanceIndicator">
                                     <html:div class="colorSegment greenSegment"></html:div>
@@ -153,11 +153,17 @@
 
                 </HBox>
 
-            <VBox class="sapUiMediumMarginBegin sapUiMediumMarginTop sapUiSmallMarginBottom sapUiSmallMarginEnd sapUiResponsiveContentPadding" >
+            <VBox class="sapUiMediumMarginBegin sapUiMediumMarginTop sapUiSmallMarginBottom sapUiMediumMarginEnd sapUiResponsiveContentPadding" >
 
                 <VBox >
 
                     <VBox >
+
+                        <HBox id="noDataBox" justifyContent="Center" visible="true" >
+                            <VBox >
+                                <Title text="No Data"></Title>                                
+                            </VBox>                            
+                        </HBox>
 
                         <grid:CSSGrid
                             width="100%"
@@ -166,7 +172,7 @@
                             gridAutoRows="1fr"                                    
                             gridTemplateColumns="repeat(5, 1fr)"
                             gridTemplateRows="repeat(2, 1fr)"                                                                     
-                            gridGap="1rem 0.5rem"
+                            gridGap="1rem 0.5rem"                            
                             items="{news>/news}">
                                                 
                             <grid:items>

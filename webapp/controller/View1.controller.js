@@ -6,11 +6,15 @@ sap.ui.define([
 	"sap/m/VBox",
 	"sap/ui/thirdparty/jquery",
 	"sap/ui/core/Fragment",
-    "sap/m/MessageBox"
-], function(Controller, Image, Text, Button, VBox, jQuery, Fragment, MessageBox) {
+    "sap/m/MessageBox",
+    "../utils/formatter"
+], function(Controller, Image, Text, Button, VBox, jQuery, Fragment, MessageBox,formatter) {
     "use strict";
 
     return Controller.extend("project1.controller.View1", {
+
+        formatter: formatter,
+
         onInit: function() {
             // Obtenha a referência à sua view
             var oView = this.getView();
@@ -165,6 +169,7 @@ sap.ui.define([
                 oInput.setValueStateText("Required field");
             } else {
                 oInput.setValueState(sap.ui.core.ValueState.None);
+                this.loadClipping();
             }
         },
 
@@ -178,6 +183,8 @@ sap.ui.define([
             // var oObjectHeader = this.byId("TTL1");
             
             var oMaterial = this.byId("vm").getSelectedKey();
+
+            this.byId("idPage").setBusy(true);
             
             // var sObjectHeaderTitle = oObjectHeader.getText();
             var sObjectHeaderTitle = oMaterial;
@@ -270,6 +277,8 @@ sap.ui.define([
         dataNews: function(data){              
             //var oModel = new sap.ui.model.json.JSONModel();
             var oModel = this.getView().getModel("news");
+
+            this.byId("noDataBox").setVisible(false);
             
             //oModel.setData(data.news);
             oModel.setData({ news: [] }); // Limpa a lista de notícias existente
@@ -278,11 +287,13 @@ sap.ui.define([
                 this.adicionaNews( element.title, element.text,element.url,element.publish_date,element.url,element.author,element.source_country,element.image);
             });
             
+            this.byId("idPage").setBusy(false);
             //var oModel = this.getView().getModel("news");
             //var dataNews = oModel.getData();
             var dataNews = oModel.getData().news;
             if( dataNews.length === 0){
                 MessageBox.information("News not found");
+                this.byId("noDataBox").setVisible(true);
                 return;
             }
             console.log("dataNews: ", dataNews);
