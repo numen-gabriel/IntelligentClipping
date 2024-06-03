@@ -252,7 +252,7 @@ sap.ui.define([
                 `<svg width="${iWidth}" height="${iHeight}" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                     <rect width="100%" height="100%" fill="white" />
                     <foreignObject x="10" y="10" width="180" height="180">
-                        <div xmlns="http://www.w3.org/1999/xhtml" style="font-size: 3vw; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; text-align: center; word-wrap: break-word;">
+                        <div xmlns="http://www.w3.org/1999/xhtml" style="font-size: 3vw; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; text-align: left; word-wrap: break-word;">
                             ${sText}
                         </div>
                     </foreignObject>

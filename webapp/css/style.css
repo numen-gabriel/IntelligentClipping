@@ -219,13 +219,13 @@
     color: blue !important;
 }
 *[data-myTextColor='Pink'] .sapMBtnText{
-    color: #DC6BB2 !important
+    color: #C71585 !important
 }
 *[data-myTextColor='Purple'] .sapMBtnText{
-    color: #ACA0F4 !important
+    color: #7B68EE !important
 }
 *[data-myTextColor='GreenWater'] .sapMBtnText{
-    color: #47C0B9 !important
+    color: #20B2AA!important
 }
 :focus>[class*='sapM'] {
     outline-style: none !important ;
@@ -383,8 +383,8 @@
     
     object-fit: cover;
     width: 100%;
-    min-height: 518px;
-    max-height: 518px;
+    min-height: 542px;
+    max-height: 542px;
     
 
  }
@@ -432,17 +432,17 @@
 }
 
 .priceImpactBox{
-  background-color: #DC6BB2 !important;
+  background-color: #C71585 !important;
 }
 
 .availabilityImpactBox{
   margin-left: 10px;
-  background-color: #ACA0F4 !important;
+  background-color: #7B68EE !important;
 }
 
 .esgImpactBox {
   margin-left: 10px; /* Adicionando margem esquerda */
-  background-color: #47C0B9 !important;
+  background-color: #20B2AA !important;
 }
 
 .availabilityImpactBox .sapMText,.priceImpactBox .sapMText,.esgImpactBox .sapMText{

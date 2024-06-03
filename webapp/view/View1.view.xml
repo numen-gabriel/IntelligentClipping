@@ -21,7 +21,7 @@
                     
 		<content>
 
-            <Toolbar design="Solid" class="sapUiMediumMargin sapUiResponsiveContentPadding noBottomBorder">
+            <Toolbar design="Solid" class="noBottomBorder sapUiMediumMarginBegin sapUiMediumMarginBottom sapUiMediumMarginTop sapUiSmallMarginEnd" >
                 <VariantManagement id="vm"
                     select="onSelect"
                     save="onSave"
@@ -29,6 +29,7 @@
                     selectedKey="Steel"
                     defaultKey="Steel"
                     showFooter="false"
+                    titleStyle="H3"
                     popoverTitle="Materials">
                     <items>
                         <VariantItem key="Steel" title="Steel"
@@ -62,7 +63,7 @@
                 </VariantManagement>
                 <ToolbarSpacer />
                 <HBox >
-                    <DatePicker id="iFrom" value="{/from}" valueFormat="dd/MM/yyyy" liveChange=".validateField" 
+                    <DatePicker id="iFrom" value="{/from}" valueFormat="dd/MM/yyyy" liveChange=".validateField" class=""
                         change=".validateField" displayFormat="dd/MM/yyyy" required="true" />                    
                 </HBox>
                 
@@ -207,7 +208,7 @@
                                             key="Img"
                                             value="{news>ImgClass}"
                                             />
-                                            <core:CustomData key="myTitle" value="{news>title}" writeToDom="true"/>
+                                            <core:CustomData key="myTitle" value="{news>title}" writeToDom="true"/>                                            
                                         </customData>                                     
                                     </Image>   
                                  
