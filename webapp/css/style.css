@@ -429,6 +429,7 @@
   border-radius: 8px; /* Adicionando bordas arredondadas */
   margin-top: 10px; /* Adicionando margem superior */
   font: menu;
+  box-shadow:  2px 8px 0px rgba(0, 0, 0, 0.50)
 }
 
 .priceImpactBox{
