@@ -1,5 +1,6 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
+    "sap/ui/core/format/DateFormat",
 	"sap/m/Image",
 	"sap/m/Text",
 	"sap/m/Button",
@@ -8,7 +9,7 @@ sap.ui.define([
 	"sap/ui/core/Fragment",
     "sap/m/MessageBox",
     "../utils/formatter"
-], function(Controller, Image, Text, Button, VBox, jQuery, Fragment, MessageBox,formatter) {
+], function(Controller, DateFormat, Image, Text, Button, VBox, jQuery, Fragment, MessageBox,formatter) {
     "use strict";
 
     return Controller.extend("project1.controller.View1", {
@@ -22,6 +23,13 @@ sap.ui.define([
             // Armazene a referência ao fragmento para que possa ser acessado posteriormente
             this.oBoxNewsFragment = sap.ui.xmlfragment(oView.getId(), "project1.view.BoxNews", this);
 
+        },
+
+        formatDate: function(sDate) {
+            var oDateFormat = DateFormat.getDateInstance({
+                pattern: "dd MMM, yyyy"
+            });
+            return oDateFormat.format(new Date(sDate));
         },
 
         onTabSelect: function(oEvent){
@@ -192,19 +200,36 @@ sap.ui.define([
             console.log("TTL1: ", sObjectHeaderTitle);
             
             // this.getView().byId("section1").setVisible(true);
+
+            const oData = this.getView().getModel().getData();
+            const fromDate = oData.from;
+            const toDate = oData.to;
+            const formattedFromDate = sap.ui.core.format.DateFormat.getDateInstance({
+                pattern: "dd/MM/yyyy"
+            }).format(fromDate);
+            const formattedToDate = sap.ui.core.format.DateFormat.getDateInstance({
+                pattern: "dd/MM/yyyy"
+            }).format(toDate);
+            console.log("variavel nova: ", formattedFromDate);
+
+            /*
             var data = this.getView().getModel().getData();
             console.log("var data: ", data);
-            const partesData = data.from.split('/');
-            console.log("var partesData: ", partesData);
-            const dataFormatada = `${partesData[2]}-${partesData[1]}-${partesData[0]}`;
-            console.log("var dataFormatada: ", dataFormatada);
+            */
+            const partesFromData = formattedFromDate.split('/');
+            const partesToData = formattedToDate.split('/');
+            console.log("var partesFromData: ", partesFromData);
+            const dataFromFormatada = `${partesFromData[2]}-${partesFromData[1]}-${partesFromData[0]}`;
+            const dataToFormatada = `${partesToData[2]}-${partesToData[1]}-${partesToData[0]}`;
+            console.log("var dataFormatada: ", dataFromFormatada);
+            
 
               var meusDados = "41f32810c57c4cc1b78e9d792c813d09";
               
               const params = new URLSearchParams({
-                'text': sObjectHeaderTitle,
-                'language': 'en',                                
-                'earliest-publish-date': dataFormatada,
+                'text': sObjectHeaderTitle,                              
+                'earliest-publish-date': dataFromFormatada,
+                'latest-publish-date': dataToFormatada,
                 'sort': 'publish-time',
                 'sort-direction': 'DESC',
                 'number': 10

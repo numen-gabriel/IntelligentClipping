@@ -63,8 +63,30 @@
                 </VariantManagement>
                 <ToolbarSpacer />
                 <HBox >
-                    <DatePicker id="iFrom" value="{/from}" valueFormat="dd/MM/yyyy" liveChange=".validateField" class=""
-                        change=".validateField" displayFormat="dd/MM/yyyy" required="true" />                    
+                    <!--
+                    <DatePicker id="iFrom1" value="{/from}" valueFormat="dd/MM/yyyy" liveChange=".validateField" class=""
+                        change=".validateField" displayFormat="dd/MM/yyyy" required="true" /> 
+                    -->
+                    <DateRangeSelection
+                        id="iFrom"
+                        change=".validateField"
+                        liveChange=".validateField"
+                        required="true"
+                        displayFormat="dd/MM/yyyy"
+                        valueFormat="dd/MM/yyyy"
+                        value= "{
+                            'type': 'sap.ui.model.type.DateInterval',
+                            'parts': [
+                                {
+                                    'type': 'sap.ui.model.type.Date',
+                                    'path': '/from'
+                                },
+                                {
+                                    'type': 'sap.ui.model.type.Date',
+                                    'path': '/to'
+                                }
+                            ]
+                        }"/>                   
                 </HBox>
                 
             </Toolbar>
@@ -139,18 +161,18 @@
 
                     </HBox>
 
-                            <VBox class="sapUiMediumMarginEnd boxRelevanceLegend">
-                                <Text text="Relevance" class="" />
-                                <html:div class="customRelevanceIndicator">
-                                    <html:div class="colorSegment greenSegment"></html:div>
-                                    <html:div class="colorSegment yellowSegment"></html:div>
-                                    <html:div class="colorSegment redSegment"></html:div>
-                                </html:div>
-                                <HBox justifyContent="SpaceBetween" width="100%" class="">
-                                    <Text text="Low" textAlign="Center" />
-                                    <Text text="High" textAlign="Center" />
-                                </HBox>
-                            </VBox>   
+                    <VBox class="sapUiMediumMarginEnd boxRelevanceLegend">
+                        <Text text="Relevance" class="" />
+                        <html:div class="customRelevanceIndicator">
+                            <html:div class="colorSegment greenSegment"></html:div>
+                            <html:div class="colorSegment yellowSegment"></html:div>
+                            <html:div class="colorSegment redSegment"></html:div>
+                        </html:div>
+                        <HBox justifyContent="SpaceBetween" width="100%" class="">
+                            <Text text="Low" textAlign="Center" />
+                            <Text text="High" textAlign="Center" />
+                        </HBox>
+                    </VBox>   
 
                 </HBox>
 
@@ -231,6 +253,8 @@
                                         <Text class="title" text="{news>title}" />
                                         <HBox justifyContent="SpaceBetween" >
                                             <Text class="author" text="{news>author}" />
+                                            <Text class="author" text="{path: 'news>date', formatter: '.formatDate'}" />
+
                                             <HBox class="chartBox">
                                                 <microchart:BulletMicroChart size="S" scale="" targetValue="{news>TargetValue}" showActualValue="false" showTargetValue="false" minValue="0" maxValue="100">
                                                     <microchart:customData>
