@@ -251,12 +251,16 @@
 
                                     <VBox class="content">
                                         <Text class="title" text="{news>title}" />
-                                        <HBox justifyContent="SpaceBetween" >
-                                            <Text class="author" text="{news>author}" />
-                                            <Text class="author" text="{path: 'news>date', formatter: '.formatDate'}" />
-
+                                        <HBox justifyContent="SpaceBetween" >                                            
+                                                <Text class="author" text="{news>author}" />
+                                                <!-- <Text class="author" text="{path: 'news>date', formatter: '.formatDate'}" /> -->
                                             <HBox class="chartBox">
-                                                <microchart:BulletMicroChart size="S" scale="" targetValue="{news>TargetValue}" showActualValue="false" showTargetValue="false" minValue="0" maxValue="100">
+
+                                                <HBox class="sapUiSmallMarginEnd">
+                                                    <Text class="author" text="{path: 'news>date', formatter: '.formatDate'}"/>
+                                                </HBox>
+                                                
+                                                <microchart:BulletMicroChart class="BulletMc" size="S" scale="" targetValue="{news>TargetValue}" showActualValue="false" showTargetValue="false" minValue="0" maxValue="100">
                                                     <microchart:customData>
                                                         <core:CustomData key="myBarColor" value="Green" writeToDom="true"/>
                                                         <core:CustomData key="myTargetVisible" value="{news>Low}" writeToDom="true"/>
@@ -265,7 +269,7 @@
                                                         <microchart:BulletMicroChartData value="0" color="None"/>                                                                        
                                                     </microchart:actual>                                                                      
                                                 </microchart:BulletMicroChart>  
-                                                <microchart:BulletMicroChart size="S" scale="" targetValue="{news>TargetValue}" showActualValue="false" showTargetValue="false" minValue="0" maxValue="100">
+                                                <microchart:BulletMicroChart class="BulletMc" size="S" scale="" targetValue="{news>TargetValue}" showActualValue="false" showTargetValue="false" minValue="0" maxValue="100">
                                                     <microchart:customData>
                                                         <core:CustomData key="myBarColor" value="Yellow" writeToDom="true"/>
                                                         <core:CustomData key="myTargetVisible" value="{news>Medium}" writeToDom="true"/>
@@ -274,7 +278,7 @@
                                                         <microchart:BulletMicroChartData value="0" color="None"/>                                                                        
                                                     </microchart:actual>                                                                      
                                                 </microchart:BulletMicroChart> 
-                                                <microchart:BulletMicroChart size="S" scale="" targetValue="{news>TargetValue}" showActualValue="false" showTargetValue="false" minValue="0" maxValue="100">
+                                                <microchart:BulletMicroChart class="BulletMc" size="S" scale="" targetValue="{news>TargetValue}" showActualValue="false" showTargetValue="false" minValue="0" maxValue="100">
                                                     <microchart:customData>
                                                         <core:CustomData key="myBarColor" value="Red" writeToDom="true"/>
                                                         <core:CustomData key="myTargetVisible" value="{news>High}" writeToDom="true"/>
