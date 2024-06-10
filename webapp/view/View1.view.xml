@@ -15,7 +15,7 @@
 		id="idPage"
 		title=" Intelligent Clipping"
         showHeader="false"
-        showSubHeader="true"        
+        showSubHeader="true"                
 		class= "sapUiResponsivePadding--header pageStyle" >
 		<!-- this CSS class add a standard spacing to all the page content -->        
                     

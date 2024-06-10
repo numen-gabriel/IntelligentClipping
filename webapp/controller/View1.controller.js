@@ -266,6 +266,11 @@ sap.ui.define([
             var iWidth = oImage.getWidth();
             var iHeight = oImage.getHeight();
 
+            var pathImgText = oEvent.getSource().getBindingInfo("src").binding.getContext().sPath + "/text";
+            var pathImgTitle = oEvent.getSource().getBindingInfo("src").binding.getContext().sPath + "/title";
+            var text = this.getView().getModel("news").getProperty(pathImgText);
+            this.getView().getModel("news").setProperty(pathImgTitle,text);
+
             var sSvgImage = this._generateSvgImage(sText, iWidth, iHeight);
 
             oImage.setSrc(sSvgImage);
