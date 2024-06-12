@@ -37,7 +37,10 @@ sap.ui.define([
                 }
                 return response.json();
               })
-              .then(dataResponse => console.log("Deu certo: ", dataResponse))
+              .then(dataResponse => {
+                console.log("Deu certo: ", dataResponse);
+                this.tokenCompany = dataResponse.value[1].Value;
+            })
               .catch(error => console.error("Erro ao chamar a API:", error));
 
               
@@ -243,7 +246,7 @@ sap.ui.define([
             console.log("var dataFormatada: ", dataFromFormatada);
             
 
-              var meusDados = "41f32810c57c4cc1b78e9d792c813d09";
+              //var meusDados = "41f32810c57c4cc1b78e9d792c813d09";
               
               const params = new URLSearchParams({
                 'text': sObjectHeaderTitle,                              
@@ -265,7 +268,7 @@ sap.ui.define([
                 method: 'GET',
                 headers: {
                   'Content-Type': 'application/json',
-                  'x-api-key': meusDados
+                  'x-api-key': this.tokenCompany
                 },
               })
               .then(response => {
