@@ -10,10 +10,10 @@
             "csrfProtection": false
           },  
           {
-            "source": "^/odata/v4/processor/News",
-            "target": "/odata/v4/processor/News",
+            "source": "^/odata/(.*)$",
+            "target": "/odata/$1",
             "destination": "Intelligent-Clipping-CAP",
-            "authenticationType": "none",
+            "authenticationType": "xsuaa",
             "csrfProtection": false
           },  
           {

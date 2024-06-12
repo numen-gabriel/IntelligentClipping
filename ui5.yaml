@@ -15,6 +15,8 @@ server:
             destination: worldNewsApi        
           - path: /chat/completions
             destination: Hack2Build_GenAI
+          - path: /odata/v4/processor/News
+            destination: Intelligent-Clipping-CAP
         ui5:
           path:
             - /resources
