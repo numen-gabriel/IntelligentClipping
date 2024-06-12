@@ -8,14 +8,21 @@
             "authenticationType": "xsuaa",
             "destination": "workflowtrigger",
             "csrfProtection": false
-          },    
+          },  
+          {
+            "source": "^/odata/v4/processor/News",
+            "target": "/odata/v4/processor/News",
+            "destination": "Intelligent-Clipping-CAP",
+            "authenticationType": "none",
+            "csrfProtection": false
+          },  
           {
             "source": "^/chat/(.*)$",
             "target": "/chat/$1",
             "destination": "Hack2Build_GenAI",
             "authenticationType": "xsuaa",
             "csrfProtection": false
-          },    
+          },  
           {
             "source": "^/search-news(.*)$",
             "target": "/search-news$1",

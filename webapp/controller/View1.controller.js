@@ -8,8 +8,10 @@ sap.ui.define([
 	"sap/ui/thirdparty/jquery",
 	"sap/ui/core/Fragment",
     "sap/m/MessageBox",
-    "../utils/formatter"
-], function(Controller, DateFormat, Image, Text, Button, VBox, jQuery, Fragment, MessageBox,formatter) {
+    "../utils/formatter",
+    "sap/ui/model/json/JSONModel",
+    "sap/ui/core/routing/History"
+], function(Controller, DateFormat, Image, Text, Button, VBox, jQuery, Fragment, MessageBox,formatter, JSONModel, History) {
     "use strict";
 
     return Controller.extend("project1.controller.View1", {
@@ -22,6 +24,23 @@ sap.ui.define([
 
             // Armazene a referência ao fragmento para que possa ser acessado posteriormente
             this.oBoxNewsFragment = sap.ui.xmlfragment(oView.getId(), "project1.view.BoxNews", this);
+            
+            //chamada da destination intelligent clipping cap
+            var url = this.getBaseURL() + `/odata/v4/processor/News`;
+            console.log("o que é a URL: ", url);
+            const promise = fetch(url, {
+                method: 'GET'
+            })
+            .then(response => {
+                if (!response.ok) {
+                  throw new Error('A resposta da rede não foi ok.');
+                }
+                return response.json();
+              })
+              .then(dataResponse => console.log("Deu certo: ", dataResponse))
+              .catch(error => console.error("Erro ao chamar a API:", error));
+
+              
 
         },
 

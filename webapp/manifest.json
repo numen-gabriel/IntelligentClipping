@@ -27,7 +27,7 @@
           }
         }
       }
-    }
+    }    
   },
   "sap.ui": {
     "technology": "UI5",
