@@ -487,3 +487,24 @@
   pointer-events: none;
   border-radius: 0px;
 }
+
+.transparentPopover .sapMPopoverCont {
+  background: #efefeffa !important;
+}
+
+.pricePopoverText{
+  color: #C71585;
+}
+
+.newsPopoverText{
+  color: blue;
+}
+
+.popoverText .sapMLabel{
+  color: black;
+  font-weight: bold;
+}
+
+.popoverText .sapMText{  
+  font-weight: bold;
+}

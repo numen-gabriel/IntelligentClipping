@@ -5,13 +5,17 @@ sap.ui.define([
 	"sap/m/Text",
 	"sap/m/Button",
 	"sap/m/VBox",
-	"sap/ui/thirdparty/jquery",
-	"sap/ui/core/Fragment",
+	"sap/ui/thirdparty/jquery",	
     "sap/m/MessageBox",
     "../utils/formatter",
     "sap/ui/model/json/JSONModel",
-    "sap/ui/core/routing/History"
-], function(Controller, DateFormat, Image, Text, Button, VBox, jQuery, Fragment, MessageBox,formatter, JSONModel, History) {
+    "sap/ui/core/routing/History",
+    'sap/viz/ui5/format/ChartFormatter',
+    'sap/viz/ui5/api/env/Format',
+    "sap/m/Popover",
+    "sap/ui/core/Fragment",
+    "sap/m/PlacementType" 
+], function(Controller, DateFormat, Image, Text, Button, VBox, jQuery, MessageBox,formatter,JSONModel,History,ChartFormatter,Format,Popover,Fragment,PlacementType) {
     "use strict";
 
     return Controller.extend("project1.controller.View1", {
@@ -20,7 +24,121 @@ sap.ui.define([
 
         onInit: function() {
             // Obtenha a referência à sua view
+            Format.numericFormatter(ChartFormatter.getInstance());
             var oView = this.getView();
+
+            var oData = {
+                data: []
+            };
+
+            let currentDate = new Date();
+            currentDate.setDate(currentDate.getDate() - 40);
+
+            for (var i = 1; i <= 40; i++) {
+                let newDate = new Date(currentDate);
+                newDate.setDate(currentDate.getDate() + i);
+                oData.data.push({
+                    day: newDate.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }),
+                    lineValue: ( Math.random() * 100 * 115 ).toFixed(3),
+                    barValue: Math.floor(Math.random() * 100)                  
+                });
+            }
+
+            var oModel = new JSONModel(oData);
+            var oVizFrame = this.oVizFrame = this.getView().byId("idVizFrame");
+            oVizFrame.setModel(oModel);
+            oVizFrame.setVizProperties({
+                plotArea: {
+                    window: {
+                        start: "firstDataPoint",
+                        end: "lastDataPoint"
+                    },
+                    dataLabel: {
+                        formatString:ChartFormatter.DefaultPattern.SHORTFLOAT_MFD2,
+                        visible: false
+                    },
+                    marker: {
+                        shape: "triangleUp"
+                    },
+                    dataPointStyle: {
+                        rules: [
+                            {
+                                dataContext: {
+                                    Price: "*" 
+                                },    
+                                properties: {
+                                    color: "#C71585", 
+                                    lineColor: "#C71585",
+                                    lineType: "solid",
+                                    type: "triangleUp"
+                                },
+                                displayName: "Price",
+                            },
+                            {
+                                dataContext: {
+                                    News: "*" 
+                                },
+                                properties: {
+                                    color: "blue"                                  
+                                },
+                                displayName: "News",                                
+                            }
+                        ]   
+                    }                  
+                },    
+                interaction: {
+                    selectability: {
+                        mode: 'NONE',
+                        legendSelection: false
+                    },
+                    noninteractiveMode: true
+                },                         
+                legendGroup: {
+                    layout: {
+                        position: "top",
+                        alignment: "topLeft"
+                    }
+                },                
+                valueAxis: {
+                    visible: true,
+                    label: {
+                        formatString:ChartFormatter.DefaultPattern.SHORTFLOAT,
+                        style: {
+                            color: "blue" // cor dos rótulos do eixo y
+                        }                        
+                    },
+                    title: {
+                        visible: false
+                    }
+                },
+                valueAxis2: {
+                    visible: true,
+                    label: {
+                        formatString:ChartFormatter.DefaultPattern.SHORTFLOAT,
+                        style: {
+                            color: "#C71585" // cor dos rótulos do eixo y
+                        }                        
+                    },
+                    title: {
+                        visible: false
+                    },                                    
+                },
+                timeAxis: {
+                    title: {
+                        visible: false
+                    },
+                    interval : {
+                        unit : ''
+                    }
+                    
+                },
+                title: {
+                    visible: false
+                },
+                interaction: {
+                    syncValueAxis: false
+                }
+            });            
 
             // Armazene a referência ao fragmento para que possa ser acessado posteriormente
             this.oBoxNewsFragment = sap.ui.xmlfragment(oView.getId(), "project1.view.BoxNews", this);
@@ -46,6 +164,52 @@ sap.ui.define([
               
 
         },
+
+        onSelectDataChart: function(oEvent){
+            var oVizFrame = this.byId("idVizFrame");
+            var aSelectedData = oEvent.getParameter("data");
+            var oData = aSelectedData[0].data;
+
+            if( oData.measureNames === 'News' ){
+                oData.Price = aSelectedData[0].target['__addition_data__']['Price'];
+            }else if( oData.measureNames === 'Price' ){
+                oData.News = aSelectedData[0].target['__addition_data__']['News'];
+            }
+
+            // Carregar e abrir o fragmento do popover
+            if (!this._oPopover) {
+                Fragment.load({
+                    id: this.getView().getId(),
+                    name: "project1.view.PopoverChart",
+                    controller: this
+                }).then(function (oPopoverContent) {
+                    this._oPopover = new Popover({
+                        showHeader: false,                        
+                        placement: PlacementType.Bottom,
+                        content: [oPopoverContent]
+                    });
+                    this._oPopover.addStyleClass("transparentPopover");
+                    this.getView().addDependent(this._oPopover);
+
+                    // Atualizar o conteúdo do fragmento com os dados selecionados
+                    this._updatePopoverContent(oData);
+                    this._oPopover.openBy(aSelectedData[0].target);
+                }.bind(this));
+            } else {
+                // Atualizar o conteúdo do fragmento com os dados selecionados
+                this._updatePopoverContent(oData);
+                this._oPopover.openBy(aSelectedData[0].target);
+                this._oPopover.addStyleClass("transparentPopover");
+            }
+
+        },
+
+        _updatePopoverContent: function (oData) {
+            var oView = this.getView();
+            oView.byId("date").setText(new Date(oData.day).toLocaleDateString('en-US',{year: 'numeric', month:'long', day: 'numeric'}));
+            oView.byId("news").setText(oData.News);
+            oView.byId("price").setText('$ ' + oData.Price);
+        },        
 
         formatDate: function(sDate) {
             var oDateFormat = DateFormat.getDateInstance({

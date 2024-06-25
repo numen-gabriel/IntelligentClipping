@@ -1,0 +1,104 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:microchart="sap.suite.ui.microchart"
+    xmlns:custom="project1.control"
+    xmlns:core="sap.ui.core">
+    <VBox id="popoverContent" class="sapUiSmallMargin sapUiResponsiveContentPadding">          
+            <HBox class="sapUiTinyMarginTop popoverText">
+                <Text id="date"  />            
+            </HBox>
+            <HBox class="sapUiTinyMarginTop popoverText">
+                <Label text="Global price:"></Label>
+                <Text class="pricePopoverText sapUiMediumMarginBegin" id="price" />            
+            </HBox>
+            <HBox class="sapUiTinyMarginTop sapUiTinyMarginBottom popoverText">
+                <Label text="Amount of news:"></Label>
+                <Text class="newsPopoverText sapUiTinyMarginBegin" id="news" />    
+            </HBox>                                                            
+        
+
+                                <custom:CustomVBox class="NewsVbox" press=".onClickNews" url="{news>url}">  
+                                    <custom:customData>
+                                        <core:CustomData xmlns:core="sap.ui.core"
+                                        writeToDom="true"
+                                        key="Vbox"
+                                        value="{news>VboxClass}"
+                                        />
+                                    </custom:customData>                               
+                                        <!-- <custom:layoutData>
+                                            <grid:GridItemLayoutData gridRow="{news>GridRow}" gridColumn="{news>GridColumn}" />
+                                        </custom:layoutData>                                                                                                                                       -->
+                                    <Image class="NewsImg" src="https://www.ics-shipping.org/wp-content/uploads/2020/10/tanker.jpg" error="onImageError" > 
+                                        <customData>
+                                            <core:CustomData xmlns:core="sap.ui.core"
+                                            writeToDom="true"
+                                            key="Img"
+                                            value="img"
+                                            />
+                                            <core:CustomData key="myTitle" value="Titulo noticia" writeToDom="true"/>                                            
+                                        </customData>                                     
+                                    </Image>   
+                                 
+                                        <FlexBox class="impactsBox" justifyContent="End" alignItems="Start" wrap="Wrap">
+                                            <FlexBox class="priceImpactBox" visible="true">
+                                                <Text text="Price" />
+                                            </FlexBox>
+
+                                            <FlexBox class="esgImpactBox" visible="false">
+                                                <Text text="ESG" />
+                                            </FlexBox>
+
+                                            <FlexBox class="availabilityImpactBox" visible="false">
+                                                <Text text="Availability" />
+                                            </FlexBox>
+
+                                        </FlexBox>                                
+
+                                    <VBox class="content">
+                                        <Text class="title" text="Titulo" />
+                                        <HBox justifyContent="SpaceBetween" >                                            
+                                                <Text class="author" text="Autor" />
+                                                <!-- <Text class="author" text="{path: 'news>date', formatter: '.formatDate'}" /> -->
+                                            <HBox class="chartBox">
+
+                                                <HBox class="sapUiSmallMarginEnd">
+                                                    <Text class="author" text="{path: 'news>date', formatter: '.formatDate'}"/>
+                                                </HBox>
+                                                
+                                                <microchart:BulletMicroChart class="BulletMc" size="S" scale="" targetValue="{news>TargetValue}" showActualValue="false" showTargetValue="false" minValue="0" maxValue="100">
+                                                    <microchart:customData>
+                                                        <core:CustomData key="myBarColor" value="Green" writeToDom="true"/>
+                                                        <core:CustomData key="myTargetVisible" value="{news>Low}" writeToDom="true"/>
+                                                    </microchart:customData>
+                                                    <microchart:actual>
+                                                        <microchart:BulletMicroChartData value="0" color="None"/>                                                                        
+                                                    </microchart:actual>                                                                      
+                                                </microchart:BulletMicroChart>  
+                                                <microchart:BulletMicroChart class="BulletMc" size="S" scale="" targetValue="{news>TargetValue}" showActualValue="false" showTargetValue="false" minValue="0" maxValue="100">
+                                                    <microchart:customData>
+                                                        <core:CustomData key="myBarColor" value="Yellow" writeToDom="true"/>
+                                                        <core:CustomData key="myTargetVisible" value="{news>Medium}" writeToDom="true"/>
+                                                    </microchart:customData>
+                                                    <microchart:actual>
+                                                        <microchart:BulletMicroChartData value="0" color="None"/>                                                                        
+                                                    </microchart:actual>                                                                      
+                                                </microchart:BulletMicroChart> 
+                                                <microchart:BulletMicroChart class="BulletMc" size="S" scale="" targetValue="{news>TargetValue}" showActualValue="false" showTargetValue="false" minValue="0" maxValue="100">
+                                                    <microchart:customData>
+                                                        <core:CustomData key="myBarColor" value="Red" writeToDom="true"/>
+                                                        <core:CustomData key="myTargetVisible" value="{news>High}" writeToDom="true"/>
+                                                    </microchart:customData>
+                                                    <microchart:actual>
+                                                        <microchart:BulletMicroChartData value="0" color="None"/>                                                                        
+                                                    </microchart:actual>                                                                      
+                                                </microchart:BulletMicroChart>                                         
+                                            </HBox>                                                                            
+                                        </HBox>                                    
+                                    </VBox>                                                                                                                    
+                                </custom:CustomVBox>  
+
+
+    </VBox>
+</core:FragmentDefinition>
